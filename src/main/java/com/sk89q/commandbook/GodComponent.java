@@ -59,9 +59,8 @@ public class GodComponent extends BukkitComponent implements Listener {
         config = configure(new LocalConfiguration());
         registerCommands(Commands.class);
         // Check god mode for existing players, if any
-        for (Player player : CommandBook.server().getOnlinePlayers()) {
-            checkAutoEnable(player);
-        }
+        CommandBook.server().getOnlinePlayers().forEach(p -> checkAutoEnable(p));
+
         CommandBook.registerEvents(this);
     }
 
@@ -70,9 +69,7 @@ public class GodComponent extends BukkitComponent implements Listener {
         super.reload();
         config = configure(config);
         // Check god mode for existing players, if any
-        for (Player player : CommandBook.server().getOnlinePlayers()) {
-            checkAutoEnable(player);
-        }
+        CommandBook.server().getOnlinePlayers().forEach(p -> checkAutoEnable(p));
     }
 
     private static class LocalConfiguration extends ConfigurationBase {

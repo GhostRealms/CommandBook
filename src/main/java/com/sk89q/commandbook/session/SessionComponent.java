@@ -70,7 +70,7 @@ public class SessionComponent extends BukkitComponent implements Runnable, Liste
 
     @Override
     public void disable() {
-        for (Player player : CommandBook.server().getOnlinePlayers()) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
             String type = getType(player.getClass());
             for (PersistentSession session : getSessions(player)) {
                 session.handleDisconnect();
@@ -299,7 +299,7 @@ public class SessionComponent extends BukkitComponent implements Runnable, Liste
         boolean result = false;
         try {
             // Try to parse the commander as a player's UUID
-            OfflinePlayer player = Bukkit.getOfflinePlayer(UUID.fromString(commander));
+            OfflinePlayer player = Bukkit.getOfflinePlayer(String.valueOf(UUID.fromString(commander)));
             if (player != null) {
                 // A player was found, see if they have an old file based on their name to migrate
                 File oldUserFile = new File(sessionsDir.getPath() + File.separator + player.getName() + ".yml");
